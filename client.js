@@ -6,14 +6,16 @@ const connect = function () {
     host: '165.227.47.243',
     port: 50541
   });
-  conn.on("connect", () => {
+  conn.on('connect', () => {
     console.log('Successfully connected to game server')
+    conn.write('Name: KJF');
   });
 
-  conn.on('connect', () => {
-    conn.write('Name: KJF');
-    // setInterval(() => conn.write('Move: up'), 100);
+  conn.on('data', (data) => {
+    console.log('data: ', data);
   });
+
+  
  
   // interpret incoming data as text
   conn.setEncoding("utf8");
@@ -22,6 +24,6 @@ const connect = function () {
 };
 
 console.log("Connecting ...");
-connect();
+
 
 module.exports = {connect};
